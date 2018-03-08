@@ -2,10 +2,7 @@ package com.gech.demo.Security;
 
 
 
-import com.gech.demo.Model.AppRole;
-import com.gech.demo.Model.AppRoleRepository;
-import com.gech.demo.Model.AppUser;
-import com.gech.demo.Model.AppUserRepository;
+import com.gech.demo.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,7 +16,8 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     AppRoleRepository roleRepository;
 
-
+    @Autowired
+    NewsProfileRepository newsProfileRepository;
 
     @Override
     public void run(String... strings) throws Exception{
@@ -28,13 +26,17 @@ public class DataLoader implements CommandLineRunner {
         roleRepository.save(new AppRole("USER")) ;
         roleRepository.save(new AppRole("ADMIN")) ;
 
-
-
+        NewsProfile cnn= new NewsProfile("cnn");
+        newsProfileRepository.save(cnn);
+        NewsProfile bbc= new NewsProfile("bbc");
+        newsProfileRepository.save(bbc);
         AppUser user= new AppUser("admin", "password", roleRepository.findAppRoleByRoleName("ADMIN"));
+        user.addNews(cnn);
         userRepository.save(user);
 
 
         user=  new AppUser("user", "password", roleRepository.findAppRoleByRoleName("USER"));
+        user.addNews(bbc);
         userRepository.save(user);
 
     }

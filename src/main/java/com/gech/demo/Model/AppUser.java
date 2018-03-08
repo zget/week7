@@ -23,6 +23,8 @@ public class AppUser {
     @ManyToMany(fetch = FetchType.EAGER)
     Set<AppRole> roles;
 
+    @ManyToMany()
+    Set<NewsProfile> choices;
 
 
     @Transient //Equivalent to an ignore statement
@@ -37,14 +39,14 @@ public class AppUser {
 
     public AppUser() {
         this.roles = new HashSet<>();
-
+        this.choices=new HashSet<>();
         encoder = passwordEncoder();
     }
 
     public AppUser(String username, String password, AppRole role) {
         this.username = username;
         this.roles = new HashSet<>();
-
+        this.choices=new HashSet<>();
         addRole(role);
         encoder = passwordEncoder();
         setPassword(password);
@@ -92,11 +94,21 @@ public class AppUser {
         this.roles = roles;
     }
 
+    public Set<NewsProfile> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Set<NewsProfile> choices) {
+        this.choices = choices;
+    }
 
     public void addRole(AppRole r)
     {
         this.roles.add(r);
     }
 
-
+    public void addNews(NewsProfile p)
+    {
+        this.choices.add(p);
+    }
 }
