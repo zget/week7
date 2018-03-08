@@ -3,10 +3,12 @@ package com.gech.demo.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Article {
 
-    private NewsSource newssource;
+    private Source source;
     private String author;
     private String title;
     private String description;
@@ -15,14 +17,15 @@ public class Article {
     private String publishedAt;
 
     public Article() {
+
+        }
+
+    public Source getSource() {
+        return source;
     }
 
-    public NewsSource getNewssource() {
-        return newssource;
-    }
-
-    public void setNewssource(NewsSource newssource) {
-        this.newssource = newssource;
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     public String getAuthor() {

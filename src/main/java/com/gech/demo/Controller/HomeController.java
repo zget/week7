@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Controller
@@ -23,11 +24,11 @@ AppUserRepository userRepository;
 @Autowired
 AppRoleRepository roleRepository;
 
-    @RequestMapping("/")
-    public String home(){
-
-        return "myLoginPage";
-    }
+//    @RequestMapping("/")
+//    public String home(){
+//
+//        return "myLoginPage";
+//    }
 
     @RequestMapping("/login")
     public String login(){
@@ -65,15 +66,20 @@ AppRoleRepository roleRepository;
         return "redirect:/login";
     }
 
-    @GetMapping("/news")
-    public @ResponseBody String showIndex(){
+    @RequestMapping("/")
+    public String showIndex(Model model){
         RestTemplate restTemplate=new RestTemplate();
-        Collection<Article> article=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597",Article[].class);
         NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
-        //
-        //
-        return newsApi.getTotalResults();
-        //return newsApi.getArticle().
+        model.addAttribute("Articles", newsApi.getArticles());
+        return "index";
+    }
+
+    @RequestMapping("/{userpage}")
+    public String showUserpage(Model model){
+        RestTemplate restTemplate=new RestTemplate();
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles", newsApi.getArticles());
+        return "index";
     }
 
 

@@ -2,6 +2,7 @@ package com.gech.demo.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -11,10 +12,10 @@ public class NewsApi {
 
      private String status;
      private String totalResults;
-     private Collection<Article> article;
+     private ArrayList<Article> articles;
 
     public NewsApi() {
-        this.article = new HashSet<>();
+        this.articles = new ArrayList<>();
     }
 
     public String getStatus() {
@@ -33,11 +34,11 @@ public class NewsApi {
         this.totalResults = totalResults;
     }
 
-    public Collection<Article> getArticle() {
-        return article;
+    public ArrayList<Article> getArticles() {
+        return articles;
     }
 
-    public void setArticle(Collection<Article> article) {
-        this.article = article;
+    public void setArticles(ArrayList<Article> articles) {
+        this.articles = articles;
     }
 }

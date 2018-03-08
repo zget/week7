@@ -3,11 +3,11 @@ package com.gech.demo.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewsSource {
+public class Source {
     private String id;
     private String name;
 
-    public NewsSource() {
+    public Source() {
     }
 
     public String getId() {
