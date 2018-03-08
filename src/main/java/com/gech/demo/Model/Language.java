@@ -1,5 +1,5 @@
 package com.gech.demo.Model;
 
-public enum language {
+public enum Language {
     en, es, de, pt, it, fr, ru, se, ne, zh
 }

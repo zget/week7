@@ -69,20 +69,28 @@ AppRoleRepository roleRepository;
     @RequestMapping("/")
     public String showIndex(Model model){
         RestTemplate restTemplate=new RestTemplate();
-        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles", newsApi.getArticles());
         return "index";
     }
 
-    @RequestMapping("/{userpage}")
-    public String showUserpage(Model model){
+//    @RequestMapping("/{category}")
+//    public String showUserpage(Model model){
+//        RestTemplate restTemplate=new RestTemplate();
+//        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+//        model.addAttribute("Articles", newsApi.getArticles());
+//        return "index";
+//    }
+
+    @GetMapping("/{category}")
+        public String  addCategory(Model model, @PathVariable("category") Category category){
+
         RestTemplate restTemplate=new RestTemplate();
-        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?"+category+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles", newsApi.getArticles());
-        return "index";
-    }
+        return "index2";
 
-
+        }
 
 
 }

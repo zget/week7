@@ -6,8 +6,13 @@
 </head>
 <body>
 
-<h1>Thgis is Index2....</h1>
-<p th:text="${xyz}"></p>
+<div class="form-group">
+    <label>Category</label>
+    <select  th:each="category:${categories}" name="">
+        <option value=category.> Pets</option>
+
+    </select>
+</div>
 
 
 

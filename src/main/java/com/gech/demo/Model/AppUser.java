@@ -24,7 +24,7 @@ public class AppUser {
     Set<AppRole> roles;
 
     @ManyToMany()
-    Set<NewsProfile> choices;
+    Set<UserProfile> choices;
 
 
     @Transient //Equivalent to an ignore statement
@@ -94,11 +94,11 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public Set<NewsProfile> getChoices() {
+    public Set<UserProfile> getChoices() {
         return choices;
     }
 
-    public void setChoices(Set<NewsProfile> choices) {
+    public void setChoices(Set<UserProfile> choices) {
         this.choices = choices;
     }
 
@@ -107,7 +107,7 @@ public class AppUser {
         this.roles.add(r);
     }
 
-    public void addNews(NewsProfile p)
+    public void addNews(UserProfile p)
     {
         this.choices.add(p);
     }

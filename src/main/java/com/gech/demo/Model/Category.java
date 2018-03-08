@@ -1,6 +1,8 @@
 package com.gech.demo.Model;
 
-public enum category {
+public enum Category {
+
+
 
     general, sports, business, entertainment, technology, health, science
 }

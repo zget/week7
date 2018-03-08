@@ -26,9 +26,9 @@ public class DataLoader implements CommandLineRunner {
         roleRepository.save(new AppRole("USER")) ;
         roleRepository.save(new AppRole("ADMIN")) ;
 
-        NewsProfile cnn= new NewsProfile("cnn");
+        UserProfile cnn= new UserProfile("cnn");
         newsProfileRepository.save(cnn);
-        NewsProfile bbc= new NewsProfile("bbc");
+        UserProfile bbc= new UserProfile("bbc");
         newsProfileRepository.save(bbc);
         AppUser user= new AppUser("admin", "password", roleRepository.findAppRoleByRoleName("ADMIN"));
         user.addNews(cnn);
