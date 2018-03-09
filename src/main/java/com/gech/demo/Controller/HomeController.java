@@ -80,14 +80,14 @@ AppRoleRepository roleRepository;
         RestTemplate restTemplate=new RestTemplate();
         NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles", newsApi.getArticles());
-        return "index";
+        return "home";
     }
     @RequestMapping("/sport")
     public String showSportnews(Model model){
         RestTemplate restTemplate=new RestTemplate();
-        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=sport&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles", newsApi.getArticles());
-        return "index";
+        return "home";
     }
 
     @GetMapping("/entertainment")
@@ -97,7 +97,39 @@ AppRoleRepository roleRepository;
         newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles",newsApis.getArticles());
 
-        return "index";
+        return "home";
+    }
+
+    @GetMapping("/technology")
+    public String showTechnology(@Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
+
+        RestTemplate restTemplate = new RestTemplate();
+        newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles",newsApis.getArticles());
+
+        return "home";
+    }
+
+
+    @GetMapping("/health")
+    public String showHealth(@Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
+
+        RestTemplate restTemplate = new RestTemplate();
+        newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles",newsApis.getArticles());
+
+        return "home";
+    }
+
+
+    @GetMapping("/home")
+    public String showHome(@Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
+
+        RestTemplate restTemplate = new RestTemplate();
+        newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles",newsApis.getArticles());
+
+        return "home";
     }
 
     @GetMapping("/selectcategory")

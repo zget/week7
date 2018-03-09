@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <link rel="stylesheet" href="/../static/css/indexcss.css">
+    <link rel="stylesheet" href="/../css/indexcss.css">
+    <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+
+    <!--  insert COTON stylesheets. replace index2.html and stylesheet2.css  -->
+    <title>Untitled Document</title>
+</head>
+<body>
+<!--<h1>DailyDigital.com</h1>-->
+
+<!-- NAVIGATION BAR TOP -->
+<div class="container" th:fragment="navbar2">
+    <ul class="navbartop">
+        <li><a class="active" href="/home">H O M E</a></li>
+
+        <li><a href="/technology">T E C H N O L O G Y </a></li>
+        <li><a href="/business">B U S I N E S S </a></li>
+        <li><a href="/health">H E A L T H </a></li>
+        <li><a href="/entertainment">E N T E R T A I N M E N T</a></li>
+        <li><a href="/sport">S P O R T </a></li>
+        <li><a th:href="@{/selectcategory}" class="header-link">A D D   C A T E G O R I E S</a></li>
+
+
+    </ul>
+</div>
+<!-- NAVIGATION BAR TOP -->
+<p></p>
+
+<!-- Neew Article Content Box --><!-- Neew Article Content Box -->
+<div class="container-fluid">
+    <div class="row">
+        <div th:inline="text" th:each="article : ${Articles}">
+            <div class="articlescolumn">
+                <div id="contentarea1">
+                    <img th:src="${article.urlToImage} " style="width: 100%"/>
+                    <h2><strong>Title:</strong>  <span><a th:href="${article.url}">[[${article.title}]]</a></span> </h2>
+
+                    <p>Author:<span>[[${article.author}]]</span>
+                    </p>
+
+                </div>
+                <!--<a class="share" href="https://www.w3schools.com/html/">SHARE</a>-->
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<!-- Featured Article Content Box --><!-- Featured Article Content Box -->
+
+<!-- EMail Contact Form--><!-- EMail Contact Form-->
+
+<!-- EMail Contact Form--><!-- EMail Contact Form-->
+<!-- NAVIGATION BAR BOTTOM -->
+
+</body>
+</html>

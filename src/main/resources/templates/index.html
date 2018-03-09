@@ -17,7 +17,7 @@
 <!-- NAVIGATION BAR TOP -->
 <div class="container" th:fragment="navbar">
 <ul class="navbartop">
-    <li><a class="active" href="https://coton.champlain.edu/WEBD12545A/quentin.smith/css/index.html">H O M E</a></li>
+    <li><a class="active" href="/home">H O M E</a></li>
     <li><a th:href="@{/selectcategory}" class="header-link">A D D   C A T E G O R I E S</a></li>
 
     <li style=float:right><a href="https://coton.champlain.edu/WEBD12545A/quentin.smith/html/contactpage.html">C O N T A C T</a></li>
@@ -37,7 +37,7 @@
         <div class="articlescolumn">
             <div id="contentarea1">
                 <img th:src="${article.urlToImage} " style="width: 100%"/>
-                <h2><strong>Title:</strong>  <span>[[${article.title}]]</span> </h2>
+                <h2><strong>Title:</strong>  <span><a a th:href="${article.url}">[[${article.title}]]</a></span> </h2>
 
                 <p>Author:<span>[[${article.author}]]</span>
                 </p>
