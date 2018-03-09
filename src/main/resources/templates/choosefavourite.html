@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div class="container" th:replace="index :: navbar">
+<div class="container" th:replace="home :: navbar">
 </div>
 <form  id = "contact"  th:action="@{/{category}}"  th:object="${profile}" method="post">
 

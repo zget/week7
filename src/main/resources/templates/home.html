@@ -15,16 +15,31 @@
 <!--<h1>DailyDigital.com</h1>-->
 
 <!-- NAVIGATION BAR TOP -->
-<div class="container" th:fragment="navbar2">
+<div class="container" th:fragment="navbar">
     <ul class="navbartop">
-        <li><a class="active" href="/home">H O M E</a></li>
-        <li><a class="active" href="/showtopics">TOPICS OF INTEREST</a></li> <li><a class="active" href="/home">H O M E</a></li>
+
+   <th:block sec:authorize="isAuthenticated()">
+       <li><a class="active" href="/home">H O M E</a></li>
+        <li><a th:href="@{/getchoiceform}" class="header-link">ADD FAVOURITE</a></li>
+        <li><a  th:href="@{/showtopics}">FAVOURITES</a></li>
+   </th:block>
+    <th:block sec:authorize="isAnonymous()"> <li>
+        <a class="active" href="/home">H O M E</a></li>
         <li><a href="/technology">T E C H N O L O G Y </a></li>
         <li><a href="/business">B U S I N E S S </a></li>
         <li><a href="/health">H E A L T H </a></li>
         <li><a href="/entertainment">E N T E R T A I N M E N T</a></li>
         <li><a href="/sport">S P O R T </a></li>
-        <li><a th:href="@{/selectcategory}" class="header-link">A D D   C A T E G O R I E S</a></li>
+        <li><a th:href="@{/selectcategory}" class="header-link">WATCH BY CATEGORY</a></li>
+        <li style=float:right><a href="/login">L O G I N</a></li>
+        <li style=float:right><a href="/register">S I G N U P</a></li>
+    </th:block>
+    <th:block sec:authorize="isAuthenticated()">
+        <li style=float:right><a href="/logout">L O G O U T</a></li>
+        <li style=float:right><a href="/login">L O G I N</a></li>
+   </th:block>
+
+
 
 
     </ul>

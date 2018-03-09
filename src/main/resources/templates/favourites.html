@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <link rel="stylesheet" href="/../static/css/indexcss.css">
+    <link rel="stylesheet" href="/../css/indexcss.css">
+    <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+
+    <!--  insert COTON stylesheets. replace index2.html and stylesheet2.css  -->
+    <title>Untitled Document</title>
+</head>
+<body>
+<!--<h1>DailyDigital.com</h1>-->
+
+<!-- NAVIGATION BAR TOP -->
+<div class="container" th:replace="home :: navbar"></div>
+<!-- NAVIGATION BAR TOP -->
+<p></p>
+
+<!-- News Article Content Box -->
+<div class="container-fluid">
+    <div class="row">
+            <th:block th:each="NewsApi : ${newsApis}">
+            <div th:inline="text" th:each="eacharticle : ${NewsApi.articles}">
+            <div class="articlescolumn">
+                <div id="contentarea1">
+                    <img th:src="${eacharticle.urlToImage}" style="width: 100%"/>
+                    <h2><strong>Title:</strong>  <span><a th:href="${eacharticle.url}">[[${eacharticle.title}]]</a></span></h2>
+                    <p>Author:<span>[[${eacharticle.author}]]</span></p>
+
+                </div>
+            </div>       <!--<a class="share" href="https://www.w3schools.com/html/">SHARE</a>-->
+        </div>
+            </th:block>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+<!-- Featured Article Content Box --><!-- Featured Article Content Box -->
+
+<!-- EMail Contact Form--><!-- EMail Contact Form-->
+
+<!-- EMail Contact Form--><!-- EMail Contact Form-->
+<!-- NAVIGATION BAR BOTTOM -->
+
+</body>
+</html>

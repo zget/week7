@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.Set;
 
 @Controller
@@ -29,22 +29,22 @@ AppRoleRepository roleRepository;
 @Autowired
 NewsProfileRepository newsProfileRepository;
 
-//    @RequestMapping("/")
-//    public String home(){
-//
-//        return "myLoginPage";
-//    }
+
 
     @RequestMapping("/login")
     public String login(){
 
         return "myLoginPage";
     }
+
+
     @RequestMapping("/home")
     public String homePage(){
 
-        return "index";
+        return "home";
     }
+
+
     @RequestMapping("/access-denied")
     public String accessDenied(){
 
@@ -163,19 +163,16 @@ NewsProfileRepository newsProfileRepository;
     public String processTopic(HttpServletRequest request,@Valid @ModelAttribute("newsApi") NewsApi newsApis, Authentication auth, Model model){
         AppUser appUser=userRepository.findByUsername(auth.getName());
         String choice = request.getParameter("choice");
-        UserProfile userProfile= new UserProfile("choice");
+        System.out.println(choice);
+
+
+
+        UserProfile userProfile= new UserProfile(choice);
         newsProfileRepository.save(userProfile);
         appUser.addTopic(userProfile);
         userRepository.save(appUser);
+//       System.out.println(newsProfileRepository.findByChoice("bag").toString());
 
-        Set<UserProfile> profiles=appUser.getChoices();
-        ArrayList<String> queries=new ArrayList<>();
-        for (UserProfile profile:profiles) {
-
-            queries.add(profile.getChoice());
-        }
-// String query="GoodLuck";
-//
         RestTemplate restTemplate = new RestTemplate();
         newsApis = restTemplate.getForObject("https://newsapi.org/v2/everything?q="+choice+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles",newsApis.getArticles());
@@ -186,22 +183,25 @@ NewsProfileRepository newsProfileRepository;
 
     }
 //    ###############################to display the saved topic!
-//@GetMapping("/showtopics")
-//public String showTopics(@Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model, Authentication auth){
-//        AppUser appUser=userRepository.findByUsername(auth.getName());
-//        Set<UserProfile> profiles=appUser.getChoices();
-//        ArrayList<String> queries=new ArrayList<>();
-//    for (UserProfile profile:profiles) {
-//
-//        queries.add(profile.getChoice());
-//    }
-//// String query="GoodLuck";
-////
-//    RestTemplate restTemplate = new RestTemplate();
-//    newsApis = restTemplate.getForObject("https://newsapi.org/v2/everything?q="+queries.get(1)+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
-//    model.addAttribute("Articles",newsApis.getArticles());
-//    return "home";
-//}
+@RequestMapping("/showtopics")
+public String showTopics( Model model, Authentication auth){
+        AppUser appUser=userRepository.findByUsername(auth.getName());
+        Set<UserProfile> profiles=appUser.getChoices();
+        ArrayList<String> queries=new ArrayList<>();
+    for (UserProfile profile:profiles) {
+
+        queries.add(profile.getChoice());
+    }
+    System.out.println(queries);
+    ArrayList<NewsApi> mynews=new ArrayList<>();
+    RestTemplate restTemplate = new RestTemplate();
+    for (String query:queries) {
+       mynews.add(restTemplate.getForObject("https://newsapi.org/v2/everything?q="+query+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class));
+
+    }
+    model.addAttribute("newsApis", mynews);
+    return "favourites";
+}
 
 
 // ###############################################################################################

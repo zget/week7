@@ -15,18 +15,9 @@
 <!--<h1>DailyDigital.com</h1>-->
 
 <!-- NAVIGATION BAR TOP -->
-<div class="container" th:fragment="navbar">
-<ul class="navbartop">
-    <li><a class="active" href="/home">H O M E</a></li>
-    <li><a th:href="@{/selectcategory}" class="header-link">A D D   C A T E G O R I E S</a></li>
-    <li><a th:href="@{/getchoiceform}" class="header-link">ADD FAVOURITE</a></li>
-    <li style=float:right><a href="https://coton.champlain.edu/WEBD12545A/quentin.smith/html/contactpage.html">C O N T A C T</a></li>
-    <li style=float:right><a href="https://coton.champlain.edu/WEBD12545A/quentin.smith/html/aboutpage.html">A B O U T</a></li>
-    <li style=float:right><a href="/register">S I G N U P</a></li>
-    <li style=float:right><a href="/login">L O G I N</a></li>
+<div class="container" th:replace="home::navbar"></div>
+<div>
 
-</ul>
-</div>
 <!-- NAVIGATION BAR TOP -->
 <p></p>
 
