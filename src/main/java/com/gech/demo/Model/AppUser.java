@@ -5,6 +5,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -107,7 +108,7 @@ public class AppUser {
         this.roles.add(r);
     }
 
-    public void addNews(UserProfile p)
+    public void addTopic(UserProfile p)
     {
         this.choices.add(p);
     }

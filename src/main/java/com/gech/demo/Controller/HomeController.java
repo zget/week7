@@ -4,6 +4,7 @@ package com.gech.demo.Controller;
 
 import com.gech.demo.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Controller
 public class HomeController {
@@ -24,6 +26,8 @@ AppUserRepository userRepository;
 
 @Autowired
 AppRoleRepository roleRepository;
+@Autowired
+NewsProfileRepository newsProfileRepository;
 
 //    @RequestMapping("/")
 //    public String home(){
@@ -139,7 +143,7 @@ AppRoleRepository roleRepository;
 
     }
     @PostMapping("/{category}")
-    public String PoliticsNews(HttpServletRequest request, @Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
+    public String categoryProcessing(HttpServletRequest request, @Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
         String category = request.getParameter("category");
         RestTemplate restTemplate = new RestTemplate();
         newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category="+category+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
@@ -147,5 +151,60 @@ AppRoleRepository roleRepository;
 
         return "choosendisplay";
     }
+
+//##################### displays the form for selecting topic and process it
+    @GetMapping("/getchoiceform")
+    public String chooseTopic(Model model){
+        model.addAttribute("userprofile",new UserProfile());
+        return "choiceform";
+
+    }
+    @PostMapping("/{choice}")
+    public String processTopic(HttpServletRequest request,@Valid @ModelAttribute("newsApi") NewsApi newsApis, Authentication auth, Model model){
+        AppUser appUser=userRepository.findByUsername(auth.getName());
+        String choice = request.getParameter("choice");
+        UserProfile userProfile= new UserProfile("choice");
+        newsProfileRepository.save(userProfile);
+        appUser.addTopic(userProfile);
+        userRepository.save(appUser);
+
+        Set<UserProfile> profiles=appUser.getChoices();
+        ArrayList<String> queries=new ArrayList<>();
+        for (UserProfile profile:profiles) {
+
+            queries.add(profile.getChoice());
+        }
+// String query="GoodLuck";
+//
+        RestTemplate restTemplate = new RestTemplate();
+        newsApis = restTemplate.getForObject("https://newsapi.org/v2/everything?q="+choice+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles",newsApis.getArticles());
+        return "home";
+
+
+
+
+    }
+//    ###############################to display the saved topic!
+//@GetMapping("/showtopics")
+//public String showTopics(@Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model, Authentication auth){
+//        AppUser appUser=userRepository.findByUsername(auth.getName());
+//        Set<UserProfile> profiles=appUser.getChoices();
+//        ArrayList<String> queries=new ArrayList<>();
+//    for (UserProfile profile:profiles) {
+//
+//        queries.add(profile.getChoice());
+//    }
+//// String query="GoodLuck";
+////
+//    RestTemplate restTemplate = new RestTemplate();
+//    newsApis = restTemplate.getForObject("https://newsapi.org/v2/everything?q="+queries.get(1)+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+//    model.addAttribute("Articles",newsApis.getArticles());
+//    return "home";
+//}
+
+
+// ###############################################################################################
+
 
 }

@@ -24,7 +24,7 @@ public class UserProfile {
     }
 
     public UserProfile(String choice) {
-
+        this.choice=choice;
         this.newsUsers= new HashSet<>();
     }
 
@@ -50,5 +50,13 @@ public class UserProfile {
 
     public void setNewsUsers(Set<AppUser> newsUsers) {
         this.newsUsers = newsUsers;
+    }
+
+    public String getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String choice) {
+        this.choice = choice;
     }
 }

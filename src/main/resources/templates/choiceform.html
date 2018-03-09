@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <link rel="stylesheet" href="/../static/css/indexcss.css">
+    <link rel="stylesheet" href="/../css/indexcss.css">
+    <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+
+    <!--  insert COTON stylesheets. replace index2.html and stylesheet2.css  -->
+    <title>Untitled Document</title>
+</head>
+<body>
+
+"@{/{category}}"
+
+<div class="container" th:replace="home :: navbar2"></div>
+<!--#############################enable user to enter his choosen topics############-->
+<form class="container" action="#" th:action="@{/{choice}}" th:object="${userprofile}" method="post">
+
+    <div class="form-group">
+        <input type="hidden" th:field="*{id}" />
+
+
+
+        <div class="form-group">
+            <label>Topic of Interest</label>
+            <input type="text" class="form-control" th:field="*{choice}"  name="choice" placeholder="enter your topic of interst here" >
+            <span th:if="${#fields.hasErrors('choice')}"
+                  th:errors="*{choice}"></span><br /> </div>
+
+
+
+        <input type="submit" value="Submit" />
+    </div>
+</form>
+
+<!--################################################################################-->
+</body>
+</html>
