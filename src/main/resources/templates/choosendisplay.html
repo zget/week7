@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-sringsecurity">
+<head>
+    <link rel="stylesheet" href="/../static/css/indexcss.css">
+    <link rel="stylesheet" href="/../css/indexcss.css">
+    <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+
+</head>
+<body>
+</div>
+<!-- NAVIGATION BAR TOP -->
+<p></p>
+
+<!-- Neew Article Content Box --><!-- Neew Article Content Box -->
+<div class="container-fluid">
+    <div class="row">
+        <div th:inline="text" th:each="article : ${Articles}">
+            <div class="articlescolumn">
+                <div id="contentarea1">
+                    <img th:src="${article.urlToImage}" style="width: 100%" />
+                    <h2><strong>Title:</strong>  <span>[[${article.title}]]</span> </h2>
+
+                    <p>Author:<span>[[${article.author}]]</span>
+                    </p>
+
+                </div>
+
+                <a th:href="@{/selectcategory}">ADD To FAVOURITE</a>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+</body>
+</html>

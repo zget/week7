@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-
+<head>
 <link rel="stylesheet" href="/../static/css/indexcss.css">
 <link rel="stylesheet" href="/../css/indexcss.css">
 <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
@@ -15,9 +15,10 @@
 <!--<h1>DailyDigital.com</h1>-->
 
 <!-- NAVIGATION BAR TOP -->
+<div class="container" th:fragment="navbar">
 <ul class="navbartop">
     <li><a class="active" href="https://coton.champlain.edu/WEBD12545A/quentin.smith/css/index.html">H O M E</a></li>
-    <li><a href="/addCategory">A D D  C A T E G O R I E S</a></li>
+    <li><a th:href="@{/selectcategory}" class="header-link">A D D   C A T E G O R I E S</a></li>
 
     <li style=float:right><a href="https://coton.champlain.edu/WEBD12545A/quentin.smith/html/contactpage.html">C O N T A C T</a></li>
     <li style=float:right><a href="https://coton.champlain.edu/WEBD12545A/quentin.smith/html/aboutpage.html">A B O U T</a></li>
@@ -25,40 +26,29 @@
     <li style=float:right><a href="/login">L O G I N</a></li>
 
 </ul>
+</div>
 <!-- NAVIGATION BAR TOP -->
 <p></p>
 
 <!-- Neew Article Content Box --><!-- Neew Article Content Box -->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-4" >
         <div th:inline="text" th:each="article : ${Articles}">
         <div class="articlescolumn">
             <div id="contentarea1">
+                <img th:src="${article.urlToImage} " style="width: 100%"/>
+                <h2><strong>Title:</strong>  <span>[[${article.title}]]</span> </h2>
 
+                <p>Author:<span>[[${article.author}]]</span>
+                </p>
 
-            <span>[[${article.title}]]</span>
-           <span>[[${article.author}]]</span>
-           <span>[[${article.title}]]</span>
-           <span>[[${article.description}]]</span>
-           <span>[[${article.url}]]</span>
-           <span>[[${article.urltoImage}]]</span>
-           <span>[[${article.publishedAt}]]</span>
        </div>
         <!--<a class="share" href="https://www.w3schools.com/html/">SHARE</a>-->
     </div>
-
-    <!-- Neew Article Content Box --><!-- Neew Article Content Box -->
-    <div id="contentarea2">
-        <!--<h2>IBP and Social Media Today</h2>-->
-        <p>This would host the article description</p>
-        <a class="share" href="https://www.w3schools.com/html/">SHARE</a>
-    </div>
-    <!-- Neew Article Content Box --><!-- Neew Article Content Box -->
-
-    <!-- Neew Article Content Box --><!-- Neew Article Content Box -->
         </div>
-        </div>
+            <br>
+            <br>
+            <br>
     </div>
 </div>
 <!-- Featured Article Content Box --><!-- Featured Article Content Box -->

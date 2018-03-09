@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/../static/css/indexcss.css">
+    <link rel="stylesheet" href="/../css/indexcss.css">
+    <meta http-equiv="Content-Type" Content="text/html; charset=UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container" th:replace="index :: navbar">
+</div>
+<form  id = "contact"  th:action="@{/{category}}"  th:object="${profile}" method="post">
+
+    <h4>Topics</h4>
+    <input type="hidden" th:field="*{id}"/>
+
+
+    <h4>Select Topic</h4>
+    <select th:field="*{category}" name="category">
+        <option value="Business"> business </option>
+        <option value="Entertainment">entertainment </option>
+        <option value="Health">health</option>
+        <option value="Science"> science </option>
+        <option value="Sports">sports </option>
+        <option value="Technology">technology </option>
+    </select>
+
+
+
+
+
+    <fieldset>
+        <button type="submit" id="contact-submit"  data-submit="...Sending">Submit</button>
+    </fieldset>
+</form>
+</body>
+</html>

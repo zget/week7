@@ -13,7 +13,7 @@ public class Article {
     private String title;
     private String description;
     private String url;
-    private String urltoImage;
+    private String urlToImage;
     private String publishedAt;
 
     public Article() {
@@ -60,12 +60,12 @@ public class Article {
         this.url = url;
     }
 
-    public String getUrltoImage() {
-        return urltoImage;
+    public String getUrlToImage() {
+        return urlToImage;
     }
 
-    public void setUrltoImage(String urltoImage) {
-        this.urltoImage = urltoImage;
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
     }
 
     public String getPublishedAt() {

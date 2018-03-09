@@ -13,8 +13,8 @@ public class UserProfile {
 
     private String choice;
     private Category category;
-    private Language language;
-    private Country country;
+//    private Language language;
+//    private Country country;
 
     @ManyToMany(mappedBy = "choices")
     Set<AppUser> newsUsers;
@@ -24,7 +24,31 @@ public class UserProfile {
     }
 
     public UserProfile(String choice) {
-        this.choice = choice;
+
         this.newsUsers= new HashSet<>();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<AppUser> getNewsUsers() {
+        return newsUsers;
+    }
+
+    public void setNewsUsers(Set<AppUser> newsUsers) {
+        this.newsUsers = newsUsers;
     }
 }

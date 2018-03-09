@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -69,28 +70,50 @@ AppRoleRepository roleRepository;
     @RequestMapping("/")
     public String showIndex(Model model){
         RestTemplate restTemplate=new RestTemplate();
-        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles", newsApi.getArticles());
         return "index";
     }
 
-//    @RequestMapping("/{category}")
-//    public String showUserpage(Model model){
-//        RestTemplate restTemplate=new RestTemplate();
-//        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
-//        model.addAttribute("Articles", newsApi.getArticles());
-//        return "index";
-//    }
-
-    @GetMapping("/{category}")
-        public String  addCategory(Model model, @PathVariable("category") Category category){
-
+    @RequestMapping("/business")
+    public String showBusinessnews(Model model){
         RestTemplate restTemplate=new RestTemplate();
-        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?"+category+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
         model.addAttribute("Articles", newsApi.getArticles());
-        return "index2";
+        return "index";
+    }
+    @RequestMapping("/sport")
+    public String showSportnews(Model model){
+        RestTemplate restTemplate=new RestTemplate();
+        NewsApi newsApi=restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles", newsApi.getArticles());
+        return "index";
+    }
 
-        }
+    @GetMapping("/entertainment")
+    public String showEntertainment(@Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
 
+        RestTemplate restTemplate = new RestTemplate();
+        newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles",newsApis.getArticles());
+
+        return "index";
+    }
+
+    @GetMapping("/selectcategory")
+    public String selectCategory(Model model){
+        model.addAttribute("profile",new UserProfile());
+        return "choosefavourite";
+
+    }
+    @PostMapping("/{category}")
+    public String PoliticsNews(HttpServletRequest request, @Valid @ModelAttribute("newsApi") NewsApi newsApis, Model model){
+        String category = request.getParameter("category");
+        RestTemplate restTemplate = new RestTemplate();
+        newsApis = restTemplate.getForObject("https://newsapi.org/v2/top-headlines?country=us&category="+category+"&apiKey=5be29bcdc5d64b6d867ff362c0a3c597", NewsApi.class);
+        model.addAttribute("Articles",newsApis.getArticles());
+
+        return "choosendisplay";
+    }
 
 }
